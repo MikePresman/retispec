@@ -13,3 +13,4 @@ class Config(object):
 	MAIL_USE_SSL = False
 	MAIL_USERNAME = ''
 	MAIL_PASSWORD = ''
+	JWT_SECRET_KEY = "super_secret"
