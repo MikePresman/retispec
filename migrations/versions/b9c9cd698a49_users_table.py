@@ -1,8 +1,8 @@
 """users table
 
-Revision ID: d9900be22270
+Revision ID: b9c9cd698a49
 Revises: 
-Create Date: 2019-12-29 16:55:01.894878
+Create Date: 2021-02-24 01:52:22.511218
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd9900be22270'
+revision = 'b9c9cd698a49'
 down_revision = None
 branch_labels = None
 depends_on = None

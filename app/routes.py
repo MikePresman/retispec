@@ -1,4 +1,3 @@
-
 from app import app, db, jwt
 from flask_jwt_extended import get_jwt
 from config import Config
