@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
 	SECRET_KEY = os.environ.get('SECRET_KEY') or os.urandom(16)
 	SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-            'postgresql:///flask_api_test'
+            'postgresql:///moviesapp'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	MAIL_SERVER = 'smtp.gmail.com'
 	MAIL_PORT = 587
@@ -14,3 +14,4 @@ class Config(object):
 	MAIL_USERNAME = ''
 	MAIL_PASSWORD = ''
 	JWT_SECRET_KEY = "super_secret"
+	JWT_TOKEN_LOCATION = 'cookies'

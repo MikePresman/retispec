@@ -1,29 +1,30 @@
 from flask import Flask
 from config import Config
-
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_login import LoginManager
-from flask_wtf.csrf import CSRFProtect
 from flask_cors import CORS
-from flask_jwt_extended import JWTManager
-from flask_restful import Api
 import os
 
 
+def create_app(config_filename):
+    app = Flask(__name__)
+    app.config.from_object(config_filename)
 
-app = Flask(__name__)
+    CORS(app)
 
-CORS(app)
+    from .models import db, migrate, jwt
+    db.init_app(app)
+    migrate.init_app(app, db)
+    jwt.init_app(app)
 
-app.config.from_object(Config) #this inherits the Config class, makes the Flask config be overwritten by this
+    from .blueprints.user_blueprint import user_blueprint
+    app.register_blueprint(user_blueprint)
 
-db = SQLAlchemy(app)
-
-migrate = Migrate(app, db)
-
-jwt=JWTManager(app)
+    return app
 
 
 
-from app import routes, models
+app = create_app(Config)
+
+
+
