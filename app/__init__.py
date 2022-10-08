@@ -3,10 +3,12 @@ from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_cors import CORS
+from flask_bootstrap import Bootstrap
 import os
 
 def create_app(config_filename):
     app = Flask(__name__)
+    bootstrap = Bootstrap(app)
     app.config.from_object(config_filename)
 
     CORS(app)

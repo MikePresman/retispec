@@ -17,7 +17,7 @@ class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(64))
     lastname = db.Column(db.String(64))
-    dob = db.Column(db.DateTime)
+    date_of_birth = db.Column(db.String(64))
     sex = db.Column(db.String(64))
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     image_id = db.Column(db.Integer)
