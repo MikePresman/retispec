@@ -5,7 +5,6 @@ from flask_login import LoginManager
 from flask_cors import CORS
 import os
 
-
 def create_app(config_filename):
     app = Flask(__name__)
     app.config.from_object(config_filename)
@@ -17,12 +16,10 @@ def create_app(config_filename):
     migrate.init_app(app, db)
     jwt.init_app(app)
 
-    from .blueprints.user_blueprint import user_blueprint
-    app.register_blueprint(user_blueprint)
+    from .blueprints.patient_blueprint import patient_blueprint
+    app.register_blueprint(patient_blueprint)
 
     return app
-
-
 
 app = create_app(Config)
 

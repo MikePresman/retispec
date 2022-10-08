@@ -10,42 +10,32 @@ from flask_jwt_extended import get_jwt_identity
 
 from werkzeug.security import generate_password_hash, check_password_hash
 
-@app.route('/register', methods = ["POST"])
-def register():
-    username = request.json["username"]
-    password = request.json["password"]
+@app.route('/')
+def index():
+    print("hello")
+    return 'hello world'
 
-    if (User.query.filter_by(username = username).first() == None):
-        hashed_pword = generate_password_hash(password)
-        user = User(username = username, password_hash = hashed_pword)
-        db.session.add(user)
-        db.session.commit()
-        return {'Success': True}
-    return {'Success': False}
+@app.route("/patients", methods=["GET"])
+def patients():
+    pass
 
+@app.route("/patients/new", methods=["GET"])
+def form_create_patient():
+    pass
 
-@app.route("/login", methods = ["POST"])
-def login():
-    username = request.json["username"]
-    password = request.json["password"]
-    user = User.query.filter_by(username = username).first()
+@app.route("/patients", methods=["POST"])
+def create_patient():
+    pass
 
-    if (user != None):
-        auth, details = user.authenticate(password)
-        if (auth != False):
-            return details        
-    return {'access_token': "null"} 
+@app.route("/patients/:id", methods=["GET"])
+def get_patient(id):
+    pass
 
+@app.route("/patients/:id", methods=["PATCH"])
+def update_patient(id):
+    pass
 
 
-@app.route("/hello")
-def hello():
-    return {"Hello": 1, "Time": "Now"}
 
 
-@app.route('/getkey', methods = ["POST"])
-@jwt_required()
-def protected():
-    claims = get_jwt_identity()
-    print(claims)
-    return {"ok": 1}
+
