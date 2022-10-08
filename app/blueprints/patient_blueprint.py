@@ -36,9 +36,12 @@ def form_create_patient():
 def get_patient(id):
     pass
 
-@patient_blueprint.route("/patients/:id", methods=["DELETE"])
-def delete_patient():
-    pass
+@patient_blueprint.route("/patients/<id>", methods=["GET"])
+def delete_patient(id):
+    patient = Patient.query.get(id)
+    db.session.delete(patient)
+    db.session.commit()
+    return redirect(url_for('patient_blueprint.patients'))
 
 @patient_blueprint.route("/patients/:id", methods=["PATCH"])
 def update_patient(id):
