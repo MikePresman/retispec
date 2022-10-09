@@ -15,27 +15,3 @@ def index():
     print("hello")
     return 'hello world'
 
-@app.route("/patients", methods=["GET"])
-def patients():
-    pass
-
-@app.route("/patients/new", methods=["GET"])
-def form_create_patient():
-    pass
-
-@app.route("/patients", methods=["POST"])
-def create_patient():
-    pass
-
-@app.route("/patients/:id", methods=["GET"])
-def get_patient(id):
-    pass
-
-@app.route("/patients/:id", methods=["PATCH"])
-def update_patient(id):
-    pass
-
-
-
-
-

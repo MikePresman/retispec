@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, render_template, redirect, url_for, request
-from ..forms import PatientForm
+from ..forms import PatientForm, UpdatePatientForm
 from ..models import Patient
 from random import randint
 from ..models import db 
@@ -18,10 +18,9 @@ def patients():
 def form_create_patient():
     if request.method == "POST":
         req = request.form
-        print(req)
         new_patient = Patient(firstname = req["firstname"],
                                     lastname = req["lastname"],
-                                    date_of_birth = req["dob"],
+                                    date_of_birth = req["date_of_birth"],
                                     sex = req["sex"],
                                     image_id = randint(1, 90),
                                     status = "New"
@@ -43,6 +42,18 @@ def delete_patient(id):
     db.session.commit()
     return redirect(url_for('patient_blueprint.patients'))
 
-@patient_blueprint.route("/patients/:id", methods=["PATCH"])
+@patient_blueprint.route("/update_patients/<id>", methods=["GET", "POST"])
 def update_patient(id):
-    pass
+    patient = Patient.query.get(id)
+    if request.method == "POST":
+        req = request.form
+        print(req)
+        patient.firstname = req["firstname"]
+        patient.lastname = req["lastname"]
+        patient.date_of_birth = req["date_of_birth"]
+        patient.sex = req["sex"]
+        db.session.commit()
+        return redirect(url_for('patient_blueprint.patients'))
+
+    form = UpdatePatientForm(obj=patient)
+    return render_template('new_patient_form.html', form=form)

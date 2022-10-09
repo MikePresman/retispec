@@ -22,3 +22,6 @@ class Patient(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     image_id = db.Column(db.Integer)
     status = db.Column(db.String(64))
+
+    def populate_obj(obj):
+        super().populate_obj(obj)
