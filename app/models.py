@@ -9,9 +9,7 @@ from flask import jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-db = SQLAlchemy()
-migrate = Migrate()
-jwt=JWTManager()
+from . import db
 
 class Patient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,3 +23,14 @@ class Patient(db.Model):
 
     def populate_obj(obj):
         super().populate_obj(obj)
+
+
+class Acquisition(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    eye = db.Column(db.String(64))
+    site_name = db.Column(db.String(64))
+    date_taken = db.Column(db.String(64))
+    operator_name = db.Column(db.String(64))
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    image_data = db.Column(db.LargeBinary)
+
