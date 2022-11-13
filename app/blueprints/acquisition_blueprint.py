@@ -9,3 +9,7 @@ acquisition_blueprint = Blueprint('acquisition_blueprint', __name__)
 def acquisitions():
     pass
 
+
+class CardinalContainer(Container):
+
+

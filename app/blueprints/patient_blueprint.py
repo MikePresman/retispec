@@ -5,16 +5,16 @@ from random import randint
 from ..models import db 
 patient_blueprint = Blueprint('patient_blueprint', __name__)
 
-@patient_blueprint.route("/")
+new.route("/")
 def index():
     return redirect(url_for('patient_blueprint.patients'))
 
-@patient_blueprint.route("/patients", methods=["GET"])
+new.route("/patients", methods=["GET"])
 def patients():
     patients = Patient.query.all()
     return render_template('patients.html', patients = patients)
 
-@patient_blueprint.route("/patients/new", methods=["GET", "POST"])
+new.route("/patients/new", methods=["GET", "POST"])
 def form_create_patient():
     if request.method == "POST":
         req = request.form
@@ -23,26 +23,25 @@ def form_create_patient():
                                     date_of_birth = req["date_of_birth"],
                                     sex = req["sex"],
                                     image_id = randint(1, 90),
-                                    status = "New"
-                                    )
+                                    status = "New")
         db.session.add(new_patient)
         db.session.commit()
         return redirect(url_for('patient_blueprint.patients'))
     form = PatientForm()
     return render_template('new_patient_form.html', form=form)
 
-@patient_blueprint.route("/patients/:id", methods=["GET"])
+new.route("/patients/:id", methods=["GET"])
 def get_patient(id):
     pass
 
-@patient_blueprint.route("/patients/<id>", methods=["GET"])
+new.route("/patients/<id>", methods=["GET"])
 def delete_patient(id):
     patient = Patient.query.get(id)
     db.session.delete(patient)
     db.session.commit()
     return redirect(url_for('patient_blueprint.patients'))
 
-@patient_blueprint.route("/update_patients/<id>", methods=["GET", "POST"])
+new.route("/update_patients/<id>", methods=["GET", "POST"])
 def update_patient(id):
     patient = Patient.query.get(id)
     if request.method == "POST":
